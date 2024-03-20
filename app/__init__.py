@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 import logging
 import logging.config
 
+from app.plugins.menu import MenuCommand
+
 class App:
     def __init__(self):
         os.makedirs('logs', exist_ok=True)
@@ -51,20 +53,32 @@ class App:
             item = getattr(plugin_module, item_name)
             if isinstance(item, type) and issubclass(item, Command) and item is not Command:
                 # Command names are now explicitly set to the plugin's folder name
-                self.command_handler.register_command(plugin_name, item())
+                if plugin_name == 'menu':
+                    menu_instance = MenuCommand(self.command_handler)
+                    self.command_handler.register_command(plugin_name, menu_instance)
+                else:
+                    self.command_handler.register_command(plugin_name, item())
                 logging.info(f"Command '{plugin_name}' from plugin '{plugin_name}' registered.")
 
     def start(self):
         self.load_plugins()
+        operation = {'add', 'sub', 'mul', 'div'}
         logging.info("Application started. Type 'exit' to exit.")
+        print("Application started. Type 'menu' for list of commands and 'exit' to exit.")
         try:
             while True:
                 cmd_input = input(">>> ").strip()
                 if cmd_input.lower() == 'exit':
                     logging.info("Application exit.")
                     sys.exit(0)  # Use sys.exit(0) for a clean exit, indicating success.
+                if cmd_input.lower() in operation :
+                    input1 = float(input('enter 1st value:').strip())
+                    input2 = float(input('enter 2nd value:').strip())
                 try:
-                    self.command_handler.execute_command(cmd_input)
+                    if cmd_input.lower() in self.command_handler.commands.keys() :
+                        self.command_handler.execute_command(cmd_input,input1,input2)
+                    else :
+                        self.command_handler.execute_command(cmd_input,'','')
                 except KeyError:  # Assuming execute_command raises KeyError for unknown commands
                     logging.error(f"Unknown command: {cmd_input}")
                     sys.exit(1)  # Use a non-zero exit code to indicate failure or incorrect command.
