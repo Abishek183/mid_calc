@@ -68,6 +68,8 @@ class App:
         try:
             while True:
                 cmd_input = input(">>> ").strip()
+                input1 = None
+                input2 = None
                 if cmd_input.lower() == 'exit':
                     logging.info("Application exit.")
                     sys.exit(0)  # Use sys.exit(0) for a clean exit, indicating success.
@@ -75,10 +77,8 @@ class App:
                     input1 = float(input('enter 1st value:').strip())
                     input2 = float(input('enter 2nd value:').strip())
                 try:
-                    if cmd_input.lower() in self.command_handler.commands.keys() :
-                        self.command_handler.execute_command(cmd_input,input1,input2)
-                    else :
-                        self.command_handler.execute_command(cmd_input,'','')
+                   self.command_handler.execute_command(cmd_input,input1,input2)
+                                       
                 except KeyError:  # Assuming execute_command raises KeyError for unknown commands
                     logging.error(f"Unknown command: {cmd_input}")
                     sys.exit(1)  # Use a non-zero exit code to indicate failure or incorrect command.
