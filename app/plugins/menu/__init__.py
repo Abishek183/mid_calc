@@ -6,6 +6,6 @@ class MenuCommand(Command):
     def __init__(self, command_handler):
         self.command_handler = command_handler
 
-    def execute(self):
+    def execute(self, var1, var2):
         menu_list = self.command_handler.menu_list()
         print("Menu", list(menu_list))
