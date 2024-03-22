@@ -76,8 +76,8 @@ class App:
                 if cmd_input.lower() == 'exit':
                     logging.info("Application exit.")
                     existing_data = history_instance.read_as_list()
-                    if data:
-                        existing_data.append(data)
+                    if isinstance(data, list) and all(isinstance(item, list) for item in data):
+                        existing_data.extend(data)
                     history_instance.write(existing_data)
                     sys.exit(0)  # Use sys.exit(0) for a clean exit, indicating success.
                 if cmd_input.lower() in operation :
