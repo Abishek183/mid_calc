@@ -5,6 +5,7 @@ import pandas as pd
 class History:
     def __init__(self, path='./data/calc_history.csv'):
         self.path = path
+        self.counter = 1
         if not os.path.exists(os.path.dirname(path)):
             os.makedirs(os.path.dirname(path))
             logging.info(f"The directory '{os.path.dirname(path)}' is created.")
@@ -13,9 +14,19 @@ class History:
             logging.error(f"The directory '{os.path.dirname(path)}' is not writable.")
 
     def write(self, data):
-        cal_data = pd.DataFrame(data, columns=['action', 'value1', 'value2'])
+        data_without_id = [record[1:] if len(record) == 4 else record for record in data]
+        data_with_id = [[self.counter + i] + record for i, record in enumerate(data_without_id)]
+        self.counter += len(data)
+        cal_data = pd.DataFrame(data_with_id, columns=['ID','action', 'value1', 'value2'])
         cal_data.to_csv(self.path, index=False)
     
-    def read(self):
+    def read_as_list(self):
         existing_data = pd.read_csv(self.path)
         return existing_data.values.tolist()
+    
+    def read_as_data_frame(self):
+        return pd.read_csv(self.path)
+    
+    def clear(self):
+        cal_data = pd.DataFrame([], columns=['ID','action', 'value1', 'value2'])
+        cal_data.to_csv(self.path, index=False)

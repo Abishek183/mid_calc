@@ -67,8 +67,7 @@ class App:
         logging.info("Application started. Type 'exit' to exit.")
         print("Application started. Type 'menu' for list of commands and 'exit' to exit.")
         history_instance = History()
-        data = history_instance.read()
-        print(data)
+        data = []
         try:
             while True:
                 cmd_input = input(">>> ").strip()
@@ -76,7 +75,10 @@ class App:
                 input2 = None
                 if cmd_input.lower() == 'exit':
                     logging.info("Application exit.")
-                    history_instance.write(data)
+                    existing_data = history_instance.read_as_list()
+                    if data:
+                        existing_data.append(data)
+                    history_instance.write(existing_data)
                     sys.exit(0)  # Use sys.exit(0) for a clean exit, indicating success.
                 if cmd_input.lower() in operation :
                     input1 = float(input('enter 1st value:').strip())
