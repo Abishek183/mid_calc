@@ -5,7 +5,7 @@ import logging
 
 
 class DeleteCommand(Command):
-    def execute(self,input1, input2):
+    def execute(self):
         his_instance = History()
         existing_data = his_instance.read_as_data_frame()
         record_id = int(input('enter the id for record to delete:'))

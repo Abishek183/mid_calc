@@ -63,8 +63,7 @@ class App:
 
     def start(self):
         self.load_plugins()
-        operation = {'add', 'sub', 'mul', 'div'}
-        logging.info("Application started. Type 'exit' to exit.")
+        logging.info("Application started.")
         print("Application started. Type 'menu' for list of commands and 'exit' to exit.")
         history_instance = History()
         data = []
@@ -80,12 +79,8 @@ class App:
                         existing_data.extend(data)
                     history_instance.write(existing_data)
                     sys.exit(0)  # Use sys.exit(0) for a clean exit, indicating success.
-                if cmd_input.lower() in operation :
-                    input1 = float(input('enter 1st value:').strip())
-                    input2 = float(input('enter 2nd value:').strip())
-                    data.append([cmd_input, input1, input2])
                 try:
-                   self.command_handler.execute_command(cmd_input,input1,input2)
+                   self.command_handler.execute_command(cmd_input)
                                        
                 except KeyError:  # Assuming execute_command raises KeyError for unknown commands
                     logging.error(f"Unknown command: {cmd_input}")
