@@ -3,7 +3,8 @@ import logging
 import pandas as pd
 
 class History:
-    def __init__(self, path='./data/calc_history.csv'):
+    def __init__(self):
+        path= os.environ.get('file_path')
         self.path = path
         self.counter = 1
         if not os.path.exists(os.path.dirname(path)):

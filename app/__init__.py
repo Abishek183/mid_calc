@@ -2,7 +2,6 @@ import os
 import pkgutil
 import importlib
 import sys
-from app.history import History
 from app.commands import CommandHandler, Command
 from dotenv import load_dotenv
 import logging
@@ -65,19 +64,11 @@ class App:
         self.load_plugins()
         logging.info("Application started.")
         print("Application started. Type 'menu' for list of commands and 'exit' to exit.")
-        history_instance = History()
-        data = []
         try:
             while True:
                 cmd_input = input(">>> ").strip()
-                input1 = None
-                input2 = None
                 if cmd_input.lower() == 'exit':
                     logging.info("Application exit.")
-                    existing_data = history_instance.read_as_list()
-                    if isinstance(data, list) and all(isinstance(item, list) for item in data):
-                        existing_data.extend(data)
-                    history_instance.write(existing_data)
                     sys.exit(0)  # Use sys.exit(0) for a clean exit, indicating success.
                 try:
                    self.command_handler.execute_command(cmd_input)
