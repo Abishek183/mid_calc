@@ -21,7 +21,7 @@ def test_app_start_add(capfd, monkeypatch):
         app.start()
 
     captured = capfd.readouterr()
-    assert "9" in captured.out
+    assert "9" in str(captured.out)
 
 
 def test_app_start_subtract(capfd, monkeypatch):
