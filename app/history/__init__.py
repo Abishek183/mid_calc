@@ -4,7 +4,7 @@ import pandas as pd
 
 class History:
     def __init__(self):
-        path= os.environ.get('file_path')
+        path= os.environ.get('FILE_PATH')
         self.path = path
         self.counter = 1
         if not os.path.exists(os.path.dirname(path)):

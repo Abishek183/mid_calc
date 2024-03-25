@@ -14,7 +14,8 @@ permissions:
 
 jobs:
   build:
-
+    env:
+      FILE_PATH : './data/calc_history.csv'
     runs-on: ubuntu-latest
 
     steps:
