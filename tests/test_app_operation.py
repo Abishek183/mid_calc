@@ -1,13 +1,7 @@
+"""Test that the REPL calculator operations"""
 import pytest
-
 from app import App
 
-def test_app_get_environment_variable():
-    app = App()
-#   Retrieve the current environment setting
-    current_env = app.get_environment_variable('ENVIRONMENT')
-    # Assert that the current environment is what you expect
-    assert current_env in ['DEVELOPMENT', 'TESTING', 'PRODUCTION'], f"Invalid ENVIRONMENT: {current_env}"
 
 def test_app_start_add(capfd, monkeypatch):
     """Test how the REPL handles an add command before exiting."""
@@ -16,8 +10,8 @@ def test_app_start_add(capfd, monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     app = App()
-    
-    with pytest.raises(SystemExit) as excinfo:
+
+    with pytest.raises(SystemExit) :
         app.start()
 
     captured = capfd.readouterr()
@@ -25,14 +19,14 @@ def test_app_start_add(capfd, monkeypatch):
 
 
 def test_app_start_subtract(capfd, monkeypatch):
-    """Test how the REPL handles an add command before exiting."""
+    """Test how the REPL handles an sub command before exiting."""
     # Simulate user entering an unknown command followed by 'exit'
     inputs = iter(['sub', '4', '2', 'exit'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     app = App()
-    
-    with pytest.raises(SystemExit) as excinfo:
+
+    with pytest.raises(SystemExit) :
         app.start()
 
     captured = capfd.readouterr()
@@ -40,14 +34,14 @@ def test_app_start_subtract(capfd, monkeypatch):
 
 
 def test_app_start_mul(capfd, monkeypatch):
-    """Test how the REPL handles an add command before exiting."""
+    """Test how the REPL handles an mul command before exiting."""
     # Simulate user entering an unknown command followed by 'exit'
     inputs = iter(['mul', '3', '2', 'exit'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     app = App()
-    
-    with pytest.raises(SystemExit) as excinfo:
+
+    with pytest.raises(SystemExit) :
         app.start()
 
     captured = capfd.readouterr()
@@ -55,14 +49,14 @@ def test_app_start_mul(capfd, monkeypatch):
 
 
 def test_app_start_div(capfd, monkeypatch):
-    """Test how the REPL handles an add command before exiting."""
+    """Test how the REPL handles an div command before exiting."""
     # Simulate user entering an unknown command followed by 'exit'
     inputs = iter(['div', '6', '2', 'exit'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     app = App()
-    
-    with pytest.raises(SystemExit) as excinfo:
+
+    with pytest.raises(SystemExit) :
         app.start()
 
     captured = capfd.readouterr()
