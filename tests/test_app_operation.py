@@ -62,6 +62,20 @@ def test_app_start_div(capfd, monkeypatch):
     captured = capfd.readouterr()
     assert "3" in captured.out
 
+def test_app_start_div_2(capfd, monkeypatch):
+    """Test how the REPL handles an div command before exiting."""
+    # Simulate user entering an unknown command followed by 'exit'
+    inputs = iter(['div', '6', '0', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+    app = App()
+
+    with pytest.raises(SystemExit) :
+        app.start()
+
+    captured = capfd.readouterr()
+    assert "Divide by zero error" in captured.out
+
 def test_app_start_fetch(capfd, monkeypatch):
     """Test how the REPL handles an fetch command before exiting."""
     # Simulate user entering an unknown command followed by 'exit'
