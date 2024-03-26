@@ -10,6 +10,6 @@ class DeleteCommand(Command):
         existing_data = his_instance.read_as_data_frame()
         record_id = int(input('enter the id for record to delete:'))
         updated_data = existing_data[existing_data['ID'] != record_id]
-        logging.info(f'history record of id {record_id} is deleted in ',existing_data)
         his_instance.write(updated_data.values.tolist())
         print('data history of calculator after delete:\n', his_instance.read_as_data_frame.to_string(index=False))
+        logging.info(f'history record of id {record_id} is deleted in ',existing_data)

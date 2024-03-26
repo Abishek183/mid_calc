@@ -8,4 +8,5 @@ class ClearCommand(Command):
     def execute(self):
         his_instance = History()
         his_instance.clear()
+        print('History cleared')
         logging.info('calculator history is cleared')

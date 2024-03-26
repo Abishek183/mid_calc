@@ -61,3 +61,45 @@ def test_app_start_div(capfd, monkeypatch):
 
     captured = capfd.readouterr()
     assert "3" in captured.out
+
+def test_app_start_fetch(capfd, monkeypatch):
+    """Test how the REPL handles an fetch command before exiting."""
+    # Simulate user entering an unknown command followed by 'exit'
+    inputs = iter(['fetch', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+    app = App()
+
+    with pytest.raises(SystemExit) :
+        app.start()
+
+    captured = capfd.readouterr()
+    assert "data history of calculator:" in captured.out
+
+# def test_app_start_delete(capfd, monkeypatch):
+#     """Test how the REPL handles an delete command before exiting."""
+#     # Simulate user entering an unknown command followed by 'exit'
+#     inputs = iter(['delete', 2, 'exit'])
+#     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+#     app = App()
+
+#     with pytest.raises(SystemExit) :
+#         app.start()
+
+#     captured = capfd.readouterr()
+#     assert "data history of calculator after delete:" in captured.out
+
+def test_app_start_clear(capfd, monkeypatch):
+    """Test how the REPL handles an clear command before exiting."""
+    # Simulate user entering an unknown command followed by 'exit'
+    inputs = iter(['clear', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+
+    app = App()
+
+    with pytest.raises(SystemExit) :
+        app.start()
+
+    captured = capfd.readouterr()
+    assert "History cleared" in captured.out
