@@ -15,5 +15,5 @@ class Common:
             history_instance.write(existing_data)
             return input1,input2
         except ValueError:
-            logging.info('error in getting inputs')
+            logging.error('error in getting inputs')
             return None,None
