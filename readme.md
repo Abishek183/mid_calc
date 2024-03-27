@@ -37,10 +37,25 @@ After running the main.py file used the 'menu' command to get list of registered
 3. div - for division
 
 ### Commands for history management
-1. fetch - it gets all the data from the .csv file
-2. clear - it deletes the history stored.
-3. delete - it deletes particular row in the history by the ID field.
-[link](https://github.com/Abishek183/mid_calc/blob/dev/app/history/__init__.py)
+#### 1. fetch - it gets all the data from the .csv file
+    >>> fetch
+    data history of calculator:
+    ID action  value1  value2
+    1    mul     3.0     2.0
+    2    div     6.0     2.0
+    3    div     6.0     0.0
+#### 2. clear - it deletes the history stored.
+    >>> clear
+    History cleared
+
+#### 3. delete - it deletes particular row in the history by the ID field. [link](https://github.com/Abishek183/mid_calc/blob/dev/app/history/__init__.py)
+    >>> delete
+    enter the id for record to delete:1
+    data history of calculator after delete:
+    ID action  value1  value2
+    2    mul     3.0     2.0
+    3    div     6.0     2.0
+    4    div     6.0     0.0
 
 ## Design pattern
 
