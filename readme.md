@@ -25,10 +25,11 @@ After running the main.py file used the 'menu' command to get list of registered
 2. Enter the number when asked in the interface
 3. It computes and prints the result.
 [link](https://github.com/Abishek183/mid_calc/blob/dev/app/plugins/add/__init__.py)
-    add
+### example
+    >>>add
     enter the first number: 5
     enter the second number: 4
-    9
+    9.0
 
 ### Other operation similar to Addition
 1. sub - for subtraction
@@ -71,8 +72,10 @@ Throughout the application, logging is used to record informational messages, wa
 
 ### 3. Error Handling: 
 In methods where exceptions might occur (e.g., file operations, calculations), logging is used to record the error details.
-[config in code](https://github.com/Abishek183/mid_calc/blob/dev/app/__init__.py)
+[link for usage and error handling](https://github.com/Abishek183/mid_calc/blob/dev/app/__init__.py)
 
 ## EAFP (Easier to Ask for Forgiveness than Permission):
 The try/except mechanism in Python is a key tool for implementing the EAFP approach. It allows you to attempt an operation and define how to handle specific exceptions if they occur. This approach is often considered more "Pythonic" and can lead to cleaner and more readable code, especially in situations where exceptions are expected or common.
 [link for EAFP Implemantation](https://github.com/Abishek183/mid_calc/blob/dev/app/plugins/div/__init__.py)
+
+## VIDEO DEMO - [HERE](https://drive.google.com/file/d/1DiQ7-QY-adaYlSCaWtQW1ymF2PwvQtCY/view?usp=sharing)
